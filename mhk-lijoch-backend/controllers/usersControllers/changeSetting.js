@@ -12,7 +12,7 @@ exports.changeSettings = [
   ,
   body("username")
   .isLength({min:7})
-  .withMessage("name must contain 6 characters atleast"),
+  .withMessage("username must contain 6 characters atleast"),
   body("oldPassword")
     .isLength({ min: 6 })
     .withMessage("New password must be at least 6 characters long"),
@@ -52,6 +52,7 @@ exports.changeSettings = [
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       await database.query(`UPDATE users SET name = ?, username = ?, password = ? WHERE user_id = ?`, [
         name,
+        username,
         hashedPassword,
         userId,
       ]);

@@ -13,11 +13,13 @@ export default function Settings() {
   };
 
   const saveSettings = () => {
+    const token = localStorage.getItem("token");
     fetch('http://localhost:5000/api/users/change-settings', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+       headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
       body: JSON.stringify(form),
       credentials: "include" 
 

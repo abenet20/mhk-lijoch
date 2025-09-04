@@ -1,38 +1,68 @@
 import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Login({ setAuth }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login() {
+  const [form, setForm] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/login", {
-        username, password
-      });
-      localStorage.setItem("token", res.data.token);
-      setAuth(true);
-    } catch (err) {
-      alert("Login failed!");
-    }
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleLogin = (e) => {
+    console.log("Logging in with", form);
+    e.preventDefault();
+    if (form.username && form.password) {
+    fetch('http://localhost:5000/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form),
+      credentials: "include" 
+
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('name', data.name);
+            localStorage.setItem('role', data.role);
+          }
+          navigate(`${data.role}/Dashboard`);
+          return { success: true, user: data};
+        } else {
+          return { success: false, error: data.error };
+        }
+      })
+      .catch(error => {
+        console.error('Login error:', error);
+        return { success: false, error: 'Login failed. Please try again.' };
+      });
+
+  };
+}
+
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <form className="bg-white p-6 rounded-lg shadow-lg w-80" onSubmit={handleLogin}>
-        <h2 className="text-2xl font-bold mb-4">Sunday School Login</h2>
-        <input 
-          type="text" placeholder="Username" 
-          className="w-full p-2 border rounded mb-2"
-          onChange={(e) => setUsername(e.target.value)} 
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          name="username"
+          type="username"
+          placeholder="username"
+          value={form.username}
+          onChange={handleChange}
         />
-        <input 
-          type="password" placeholder="Password" 
-          className="w-full p-2 border rounded mb-4"
-          onChange={(e) => setPassword(e.target.value)} 
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
         />
-        <button className="bg-blue-500 text-white w-full py-2 rounded">Login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

@@ -16,6 +16,6 @@ router.post("/validate-otp", ValidateOtp);
 router.post("/reset-password", resetPassword);
 router.post("/change-password", changePassword);
 router.post("/views", viewsCount);
-router.post("/change-sttings", changeSettings);
+router.post("/change-settings", changeSettings);
 
 module.exports = router;

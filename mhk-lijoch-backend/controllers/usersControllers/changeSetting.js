@@ -8,8 +8,11 @@ exports.changeSettings = [
   verifyToken,
   body("name")
   .isLength({min:3})
-  .withMessage("name mus contain 3 letters atleast")
+  .withMessage("name must contain 3 letters atleast")
   ,
+  body("username")
+  .isLength({min:7})
+  .withMessage("name must contain 6 characters atleast"),
   body("oldPassword")
     .isLength({ min: 6 })
     .withMessage("New password must be at least 6 characters long"),
@@ -22,7 +25,7 @@ exports.changeSettings = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, oldPassword, newPassword } = req.body;
+    const { name,username, oldPassword, newPassword } = req.body;
     const userId = req.user.id;
 
     try {
@@ -47,7 +50,7 @@ exports.changeSettings = [
       }
 
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-      await database.query(`UPDATE users SET name = ? password = ? WHERE user_id = ?`, [
+      await database.query(`UPDATE users SET name = ?, username = ?, password = ? WHERE user_id = ?`, [
         name,
         hashedPassword,
         userId,

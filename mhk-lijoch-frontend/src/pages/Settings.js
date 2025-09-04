@@ -2,9 +2,10 @@ import { useState } from "react";
 
 export default function Settings() {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: ""
+    name: localStorage.getItem("name"),
+    username: localStorage.getItem("username"),
+    oldPassword: "",
+    newPassword: ""
   });
 
   const handleChange = (e) => {
@@ -12,8 +13,28 @@ export default function Settings() {
   };
 
   const saveSettings = () => {
-    // TODO: Send to backend
-    alert("Settings saved!");
+    fetch('http://localhost:5000/api/users/change-settings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form),
+      credentials: "include" 
+
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Settings saved!");
+        } else {
+          return { success: false, error: data.error };
+        }
+      })
+      .catch(error => {
+        console.error('change error:', error);
+        return { success: false, error: 'change failed. Please try again.' };
+      });
+
   };
 
   return (
@@ -26,17 +47,23 @@ export default function Settings() {
         onChange={handleChange}
       />
       <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={form.email}
+        name="username"
+        placeholder="username"
+        value={form.username}
         onChange={handleChange}
       />
       <input
-        name="password"
+        name="oldPassword"
+        type="password"
+        placeholder="old password"
+        value={form.oldPassword}
+        onChange={handleChange}
+      />
+      <input
+        name="newPassword"
         type="password"
         placeholder="New Password"
-        value={form.password}
+        value={form.newPassword}
         onChange={handleChange}
       />
       <button onClick={saveSettings}>Save</button>

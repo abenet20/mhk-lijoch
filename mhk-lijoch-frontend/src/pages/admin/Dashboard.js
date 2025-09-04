@@ -36,6 +36,7 @@ export default function Dashboard() {
   return (
     <div>
       <h2>Dashboard</h2>
+      <h3>welcome {localStorage.getItem("name")}</h3>
       <nav>
         <ul>
           <li><Link to="/admin/students">Manage Students</Link></li>
@@ -43,19 +44,24 @@ export default function Dashboard() {
           <li><Link to="/settings">Account Settings</Link></li>
         </ul>
       </nav>
+      {general && (
+      <>
       <div>
         Total Students {general.totalStudents}
       </div>
       <div>
         Total Teachers {general.totalTeachers}
       </div>
-      <ul>
-        {
-          classesData.map(([name, value]) => {
-            <li>{name} - {value}</li>
-          })
-        }
-      </ul>
+      </>
+)}
+ {classesData &&  (
+  <ul>
+   
+      <li>class 4 - 6 - {classesData["class 4-6"]}</li>
+   
+  </ul>
+)}
+
     </div>
   );
 }

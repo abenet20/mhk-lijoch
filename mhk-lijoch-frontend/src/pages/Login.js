@@ -28,6 +28,7 @@ export default function Login() {
           if (data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('name', data.name);
+            localStorage.setItem('username', form.username);
             localStorage.setItem('role', data.role);
           }
           navigate(`${data.role}/Dashboard`);

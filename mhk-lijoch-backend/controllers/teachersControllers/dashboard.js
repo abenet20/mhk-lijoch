@@ -5,9 +5,13 @@ exports.teacherDashboard = [
   verifyToken,
   async (req, res) => {
     try {
-      const {user_id} = req.user;
+      const user_id = req.user.id;
 
-      const [teacher] = await database.query(`SELECT grade from teachers WHERE user_id = ?`,[user_id]);
+      const [teacher] = await database.query(
+        `SELECT * from teachers WHERE user_id = ? AND is_deleted = 0`,
+        [user_id]
+      );
+
       if (teacher.length === 0) {
         return res.status(404).json({
           success: false,
@@ -15,28 +19,47 @@ exports.teacherDashboard = [
         });
       }
 
+      let firstClass = []; //4-6
+      let secondClass = []; //7-9
+      let thirdClass = []; //10-11
+      let fourthClass = []; //12-14
+      let studentsList = [];
 
+      const [students] = await database.query(
+        `SELECT * FROM students WHERE is_deleted = 0`
+      );
 
- const [studentsCount] = await database.query(`
- SELECT
-  SUM(CASE WHEN age IN (4, 5, 6) THEN 1 ELSE 0 END) AS \`4-6\`,
-  SUM(CASE WHEN age IN (7, 8, 9) THEN 1 ELSE 0 END) AS \`7-9\`,
-  SUM(CASE WHEN age IN (10, 11) THEN 1 ELSE 0 END) AS \`10-11\`,
-  SUM(CASE WHEN age IN (12, 13, 14) THEN 1 ELSE 0 END) AS \`12-14\`
-FROM students
-WHERE is_deleted = 0
-`);
+      for (const student of students) {
+        if (student.age <= 6) {
+          firstClass.push(student);
+        } else if (student.age > 6 && student.age <= 9) {
+          secondClass.push(student);
+        } else if (student.age > 9 && student.age <= 11) {
+          thirdClass.push(student);
+        } else if (student.age > 11 && student.age <= 14) {
+          fourthClass.push(student);
+        }
+      }
 
-
+      if (teacher[0].grade == "4-6") {
+        studentsList = firstClass;
+      } else if (teacher[0].grade == "7-9") {
+        studentsList = secondClass;
+      } else if (teacher[0].grade == "10-11") {
+        studentsList = thirdClass;
+      } else if (teacher[0].grade == "12-14") {
+        studentsList = fourthClass;
+      }
+      const studentsCount = studentsList.length;
 
       let data = {};
       data.success = true;
-      data.studentsCount = studentsCount[teacher[0].grade];
-      res.json(data);
+      data.studentsCount = studentsCount;
+      return res.status(200).json(data);
     } catch (error) {
       return res.status(500).json({
         error: "Internal Server Error",
-        error
+        details: error.message,
       });
     }
   },

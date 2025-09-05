@@ -1,0 +1,88 @@
+/* FIFA Card Modern Style */
+.fifa-card {
+  background: linear-gradient(120deg, #f7d358 0%, #fffbe6 60%, #f2f2f2 100%);
+  border-radius: 36px;
+  box-shadow: 0 12px 36px rgba(44, 62, 80, 0.22), 0 1.5px 0 #d4af37;
+  padding: 48px 36px 36px 36px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  border: 5px solid #d4af37;
+  transition: box-shadow 0.2s;
+}
+.fifa-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+.fifa-card-header img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 4px solid #d4af37;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
+  margin-bottom: 10px;
+  background: #fffbe6;
+}
+.fifa-badge {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  background: linear-gradient(90deg, #d4af37 60%, #f7d358 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 6px 18px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+  letter-spacing: 1px;
+  border: 2px solid #fffbe6;
+}
+.fifa-card-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #d4af37;
+  letter-spacing: 2.5px;
+  text-shadow: 0 2px 8px rgba(44, 62, 80, 0.12);
+  margin-bottom: 2px;
+}
+.fifa-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
+}
+.fifa-card-form .MuiTextField-root {
+  background: #fffbe6;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.08);
+}
+.fifa-card-form .MuiInputLabel-root {
+  color: #d4af37 !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.fifa-card-form .MuiOutlinedInput-root {
+  border-radius: 10px;
+}
+.fifa-card-form .MuiOutlinedInput-notchedOutline {
+  border-color: #d4af37 !important;
+}
+.fifa-card-form .MuiButton-root {
+  background: linear-gradient(90deg, #d4af37 60%, #f7d358 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.12);
+  padding: 14px 0;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+.fifa-card-form .MuiButton-root:hover {
+  background: linear-gradient(90deg, #f7d358 60%, #d4af37 100%);
+}

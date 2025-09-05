@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const {insertAttendance} = require('../controllers/teachersControllers/attendance');
-const { StudentsList } = require("../controllers/teachersControllers/studentsList");
-const { getAttendanceList } = require("../controllers/teachersControllers/attendanceList");
-const { teacherDashboard } = require("../controllers/teachersControllers/dashboard");
-
+const {
+  insertAttendance,
+} = require("../controllers/teachersControllers/attendance");
+const {
+  StudentsList,
+} = require("../controllers/teachersControllers/studentsList");
+const {
+  getAttendanceList,
+} = require("../controllers/teachersControllers/attendanceList");
+const {
+  teacherDashboard,
+} = require("../controllers/teachersControllers/dashboard");
 
 router.get("/students", StudentsList);
 router.get("/dashboard", teacherDashboard);

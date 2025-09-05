@@ -1,0 +1,82 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f8;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1a237e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h2 {
+  margin-bottom: 32px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.sidebar a:hover {
+  color: #ffb300;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cards {
+  display: flex;
+  gap: 32px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 24px 32px;
+  min-width: 180px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.charts {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.chartContainer {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 24px;
+  min-width: 320px;
+  flex: 1;
+}

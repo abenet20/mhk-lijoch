@@ -16,8 +16,8 @@ exports.teachers = [
       teachers.user_id AS userId,
       users.username AS username
        FROM teachers
-      LEFT JOIN users ON teachers.user_id = users.id
-      WHERE teachers.is_deleted = 0`,
+      LEFT JOIN users ON teachers.user_id = users.user_id
+      WHERE teachers.is_deleted = 0`
     );
 
     if (teachers.length === 0) {
@@ -30,4 +30,3 @@ exports.teachers = [
     });
   },
 ];
-

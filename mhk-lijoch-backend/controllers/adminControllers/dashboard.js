@@ -21,15 +21,15 @@ exports.adminDashboard = [
     (SELECT COUNT(*) FROM attendance WHERE date = ${ethDate} AND status = 'present' AND is_deleted = 0) AS todayTotalAttendance
 `);
 
-//to calculate attendance oercentage
+      //to calculate attendance oercentage
       const todayAttendance =
         results[0].totalStudents > 0
           ? (results[0].todayTotalAttendance / results[0].totalStudents) * 100
           : 0;
-results[0].todayAttendance = todayAttendance;
+      results[0].todayAttendanceByPercent = todayAttendance;
 
-//to append grades data
- const [classesData] = await database.query(`
+      //to append grades data
+      const [classesData] = await database.query(`
  SELECT
   SUM(CASE WHEN age IN (4, 5, 6) THEN 1 ELSE 0 END) AS \`Class 4-6\`,
   SUM(CASE WHEN age IN (7, 8, 9) THEN 1 ELSE 0 END) AS \`Class 7-9\`,
@@ -39,8 +39,6 @@ FROM students
 WHERE is_deleted = 0
 `);
 
-
-
       let data = {};
       data.success = true;
       data.general = results[0];
@@ -49,7 +47,7 @@ WHERE is_deleted = 0
     } catch (error) {
       return res.status(500).json({
         error: "Internal Server Error",
-        error
+        error,
       });
     }
   },

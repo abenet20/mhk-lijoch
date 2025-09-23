@@ -21,7 +21,7 @@ export default function Login() {
     console.log("Logging in with", form);
     e.preventDefault();
     if (form.username && form.password) {
-      fetch("http://localhost:5000/api/users/login", {
+      fetch("http://lihket.com.et/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

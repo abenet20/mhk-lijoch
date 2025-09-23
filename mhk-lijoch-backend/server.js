@@ -8,7 +8,7 @@ const teacherRoutes = require("./routes/teacherRoutes");
 
 app.use(
   cors({
-    origin: "*", // allow all origins for production, or set to your domain
+    origin: "http://localhost:3000", // allow all origins for production, or set to your domain
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })

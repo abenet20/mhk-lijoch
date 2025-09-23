@@ -23,7 +23,7 @@ export default function Attendance() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/teacher/students",
+          "https://lihket.com.et/api/teacher/students",
           {
             method: "GET",
             credentials: "include",
@@ -55,7 +55,7 @@ export default function Attendance() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/teacher/insert-attendance",
+        "https://lihket.com.et/api/teacher/insert-attendance",
         {
           method: "POST",
           body: JSON.stringify({ students: att }),
@@ -67,6 +67,7 @@ export default function Attendance() {
         }
       );
       const data = await response.json();
+      console.log(data);
       if (response.ok && data.success) {
         setSuccess(data.message);
       }
@@ -176,10 +177,7 @@ export default function Attendance() {
                 >
                   {s.photo ? (
                     <img
-                      src={`http://localhost:5000/${s.photo.replace(
-                        /\\/g,
-                        "/"
-                      )}`}
+                      src={`/${s.photo}`}
                       alt="student"
                       style={{
                         width: "100%",

@@ -21,7 +21,7 @@ export default function Login() {
     console.log("Logging in with", form);
     e.preventDefault();
     if (form.username && form.password) {
-      fetch("http://lihket.com.et/api/users/login", {
+      fetch("https://lihket.com.et/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,6 +31,7 @@ export default function Login() {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           if (data.success) {
             if (data.token) {
               localStorage.setItem("token", data.token);

@@ -485,7 +485,7 @@ export default function Students() {
                   </div>
                   {s.photo && (
                     <img
-                      src={`/${s.photo}`}
+                      src={s.photo}
                       alt="student"
                       width="80"
                       style={{
@@ -517,7 +517,7 @@ export default function Students() {
                   >
                     {s.photo ? (
                       <img
-                        src={`/${s.photo}`}
+                        src={s.photo}
                         alt="student"
                         style={{
                           width: "100%",

@@ -453,7 +453,7 @@ export default function Teachers() {
                   </div>
                   {typeof t.photo === "string" && t.photo && (
                     <img
-                      src={`/${t.photo}`}
+                      src={t.photo}
                       alt="teacher"
                       width="80"
                       style={{
@@ -485,7 +485,7 @@ export default function Teachers() {
                   >
                     {typeof t.photo === "string" && t.photo ? (
                       <img
-                        src={`/${t.photo}`}
+                        src={t.photo}
                         alt="teacher"
                         style={{
                           width: "100%",

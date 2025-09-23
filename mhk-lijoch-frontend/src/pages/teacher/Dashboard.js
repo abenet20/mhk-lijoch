@@ -24,7 +24,7 @@ export default function TeacherDashboard() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/teacher/dashboard",
+          "https://lihket.com.et/api/teacher/dashboard",
           {
             method: "GET",
             credentials: "include",

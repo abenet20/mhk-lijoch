@@ -36,7 +36,7 @@ export default function Students() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/admin/students",
+          "https://lihket.com.et/api/admin/students",
           {
             method: "GET",
             credentials: "include",
@@ -75,7 +75,7 @@ export default function Students() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/admin/add/student",
+        "https://lihket.com.et/api/admin/add/student",
         {
           method: "POST",
           body: formData,
@@ -112,7 +112,7 @@ export default function Students() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/admin/remove/student",
+        "https://lihket.com.et/api/admin/remove/student",
         {
           method: "POST",
           credentials: "include",
@@ -176,7 +176,7 @@ export default function Students() {
     }
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/edit/student",
+        "https://lihket.com.et/api/admin/edit/student",
         {
           method: "POST",
           body: formData,
@@ -485,10 +485,7 @@ export default function Students() {
                   </div>
                   {s.photo && (
                     <img
-                      src={`http://localhost:5000/${s.photo.replace(
-                        /\\/g,
-                        "/"
-                      )}`}
+                      src={`/${s.photo}`}
                       alt="student"
                       width="80"
                       style={{
@@ -520,10 +517,7 @@ export default function Students() {
                   >
                     {s.photo ? (
                       <img
-                        src={`http://localhost:5000/${s.photo.replace(
-                          /\\/g,
-                          "/"
-                        )}`}
+                        src={`/${s.photo}`}
                         alt="student"
                         style={{
                           width: "100%",

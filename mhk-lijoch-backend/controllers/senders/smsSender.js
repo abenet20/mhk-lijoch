@@ -6,11 +6,11 @@ const send = (to, message) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZGVudGlmaWVyIjoiOENrcjY5NUl6QmRMb3lBcEx3Z3lCbTFIb2JYTkpzSjIiLCJleHAiOjE5MTEyOTE4NjksImlhdCI6MTc1MzUyNTQ2OSwianRpIjoiOThiZDU4NDgtMDgwMC00NjQ2LTk2ZGMtYTdiYTVjMzFlYmJiIn0.IDr6MhfLIU3VI3IQilUdM_PJtDvTG3uKYxXKHOPukc8`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZGVudGlmaWVyIjoiU1RqdGtBUVR3ZzN3c1ZhNEpYa3hmT0VjVGNUbXJabEkiLCJleHAiOjE5MTUwNDYzMzYsImlhdCI6MTc1NzI3OTkzNiwianRpIjoiMjMyMGFmYTktNTYxZS00Nzk5LTgwYzMtZjk0YWI0MGJkZjVjIn0.hn9pTaD4vV_EuuM4S5U5IUlP4op9L7Aeu_yHlDgjXSE`,
     },
     body: JSON.stringify({
       from: "e80ad9d8-adf3-463f-80f4-7c4b39f7f164",
-      sender: "9786",
+      sender: " 9786",
       to: to,
       message: message,
     }),
@@ -24,8 +24,8 @@ const send = (to, message) => {
     });
 };
 
-// send("920864496", "Hello, this is a test message from Lihket!");
+send("920864496", "Hello, this is a test message from Lihket!");
 
-module.exports = {
-  send,
-};
+// module.exports = {
+//   send,
+// };

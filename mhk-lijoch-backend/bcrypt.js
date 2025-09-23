@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
- bcrypt.hash("bereket94abuye", 10, function(err, hash) {
+ bcrypt.hash("1234", 10, function(err, hash) {
    if (err) {
      console.error("Error hashing password:", err);
     } else {

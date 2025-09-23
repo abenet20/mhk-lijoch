@@ -32,7 +32,7 @@ export default function Teachers() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/admin/teachers",
+          "https://lihket.com.et/api/admin/teachers",
           {
             method: "GET",
             credentials: "include",
@@ -69,7 +69,7 @@ export default function Teachers() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/admin/add/teacher",
+        "https://lihket.com.et/api/admin/add/teacher",
         {
           method: "POST",
           body: formData,
@@ -115,7 +115,7 @@ export default function Teachers() {
     });
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/edit/teacher",
+        "https://lihket.com.et/api/admin/edit/teacher",
         {
           method: "POST",
           body: formData,
@@ -156,7 +156,7 @@ export default function Teachers() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/admin/remove/teacher",
+        "https://lihket.com.et/api/admin/remove/teacher",
         {
           method: "POST",
           credentials: "include",
@@ -453,10 +453,7 @@ export default function Teachers() {
                   </div>
                   {typeof t.photo === "string" && t.photo && (
                     <img
-                      src={`http://localhost:5000/${t.photo.replace(
-                        /\\/g,
-                        "/"
-                      )}`}
+                      src={`/${t.photo}`}
                       alt="teacher"
                       width="80"
                       style={{
@@ -488,10 +485,7 @@ export default function Teachers() {
                   >
                     {typeof t.photo === "string" && t.photo ? (
                       <img
-                        src={`http://localhost:5000/${t.photo.replace(
-                          /\\/g,
-                          "/"
-                        )}`}
+                        src={`/${t.photo}`}
                         alt="teacher"
                         style={{
                           width: "100%",

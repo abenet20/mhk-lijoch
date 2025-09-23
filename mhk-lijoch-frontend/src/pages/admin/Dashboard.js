@@ -52,7 +52,7 @@ export default function Dashboard() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/admin/dashboard",
+          "https://lihket.com.et/api/admin/dashboard",
           {
             method: "GET",
             credentials: "include",

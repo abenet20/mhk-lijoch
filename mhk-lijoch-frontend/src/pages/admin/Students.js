@@ -48,7 +48,6 @@ export default function Students() {
           setStudents(data.students);
         }
       } catch (error) {
-        console.error("Fetch students error:", error);
         setError("Fetch students error: " + error.message);
       }
     };
@@ -132,7 +131,6 @@ export default function Students() {
         setError("Remove student error: Unknown error");
       }
     } catch (error) {
-      console.error("Remove student error:", error);
       setError("Remove student error: " + error.message);
     }
   };
@@ -155,7 +153,8 @@ export default function Students() {
   const editStudent = async () => {
     setError("");
     setSuccess("");
-    console.log(editForm);
+    // Sensitive: Do not log student edit data in production
+    // console.log('Edit student:', editForm); // commented out
     const token = localStorage.getItem("token");
     const formData = new FormData();
     Object.entries(editForm).forEach(([key, value]) => {
@@ -170,10 +169,6 @@ export default function Students() {
         }
       }
     });
-    // Debug: log FormData contents
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
     try {
       const response = await fetch(
         "https://lihket.com.et/api/admin/edit/student",
@@ -485,7 +480,7 @@ export default function Students() {
                   </div>
                   {s.photo && (
                     <img
-                      src={s.photo}
+                      src={`https://lihket.com.et/${s.photo}`}
                       alt="student"
                       width="80"
                       style={{
@@ -517,7 +512,7 @@ export default function Students() {
                   >
                     {s.photo ? (
                       <img
-                        src={s.photo}
+                        src={`https://lihket.com.et/${s.photo}`}
                         alt="student"
                         style={{
                           width: "100%",

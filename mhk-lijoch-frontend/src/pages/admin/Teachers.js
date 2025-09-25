@@ -44,7 +44,6 @@ export default function Teachers() {
           setTeachers(data.teachers);
         }
       } catch (error) {
-        console.error("Fetch teachers error:", error);
         setError("Fetch teachers error: " + error.message);
       }
     };
@@ -176,13 +175,13 @@ export default function Teachers() {
         setError("Remove teacher error: Unknown error");
       }
     } catch (error) {
-      console.error("Remove teacher error:", error);
       setError("Remove teacher error: " + error.message);
     }
   };
 
   const edittingForm = (t) => {
-    console.log("Edit button clicked for teacher:", t);
+    // Sensitive: Do not log teacher edit data in production
+    // console.log('Edit teacher:', t); // commented out
     setEditForm({
       id: Number(t.id),
       name: t.name,
@@ -453,7 +452,7 @@ export default function Teachers() {
                   </div>
                   {typeof t.photo === "string" && t.photo && (
                     <img
-                      src={t.photo}
+                      src={`https://lihket.com.et/${t.photo}`}
                       alt="teacher"
                       width="80"
                       style={{
@@ -485,7 +484,7 @@ export default function Teachers() {
                   >
                     {typeof t.photo === "string" && t.photo ? (
                       <img
-                        src={t.photo}
+                        src={`https://lihket.com.et/${t.photo}`}
                         alt="teacher"
                         style={{
                           width: "100%",

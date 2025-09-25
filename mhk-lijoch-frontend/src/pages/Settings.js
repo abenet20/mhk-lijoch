@@ -33,7 +33,6 @@ export default function Settings() {
         }
       })
       .catch((error) => {
-        console.error("change error:", error);
         return { success: false, error: "change failed. Please try again." };
       });
   };

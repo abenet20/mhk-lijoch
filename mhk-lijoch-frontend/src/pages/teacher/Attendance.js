@@ -36,7 +36,6 @@ export default function Attendance() {
           setClass(data.class);
         }
       } catch (error) {
-        console.error("Fetch students error:", error);
         setError("Fetch students error: " + error.message);
       }
     };
@@ -67,11 +66,14 @@ export default function Attendance() {
         }
       );
       const data = await response.json();
-      console.log(data);
+      // Sensitive: Do not log attendance submission data in production
+      // console.log('Attendance submission:', data); // commented out
       if (response.ok && data.success) {
         setSuccess(data.message);
+        alert(data.message);
       }
     } catch (error) {
+      // Only log errors, not sensitive data
       console.error("inserting attendance error:", error);
       setError("inserting attendance error: " + error.message);
     }
@@ -177,7 +179,7 @@ export default function Attendance() {
                 >
                   {s.photo ? (
                     <img
-                      src={`/${s.photo}`}
+                      src={`https://lihket.com.et/${s.photo}`}
                       alt="student"
                       style={{
                         width: "100%",

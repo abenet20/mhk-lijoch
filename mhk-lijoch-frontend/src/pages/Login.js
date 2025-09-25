@@ -18,7 +18,6 @@ export default function Login() {
   };
 
   const handleLogin = (e) => {
-    console.log("Logging in with", form);
     e.preventDefault();
     if (form.username && form.password) {
       fetch("https://lihket.com.et/api/users/login", {
@@ -31,7 +30,8 @@ export default function Login() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          // Sensitive: Do not log login response in production
+          // console.log('Login response:', data); // commented out
           if (data.success) {
             if (data.token) {
               localStorage.setItem("token", data.token);
@@ -47,6 +47,7 @@ export default function Login() {
           }
         })
         .catch((error) => {
+          // Only log errors, not sensitive data
           console.error("Login error:", error);
           return { success: false, error: "Login failed. Please try again." };
         });

@@ -63,9 +63,12 @@ export default function Dashboard() {
         if (response.ok && data.success) {
           setClassesData(data.classesData);
           setGeneral(data.general);
+          // Sensitive: Do not log dashboard data in production
+          // console.log('Dashboard data:', data); // commented out
         }
       } catch (error) {
-        console.error("Fetch data error:", error);
+        // Only log errors, not sensitive data
+        console.error("Fetch dashboard error:", error);
       }
     };
     fetchDashboard();

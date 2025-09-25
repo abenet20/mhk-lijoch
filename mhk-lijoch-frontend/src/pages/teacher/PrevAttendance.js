@@ -30,7 +30,8 @@ export default function PrevAttendance() {
         const data = await response.json();
         if (response.ok && data.success) {
           setAttendanceByDate(data.attendance);
-          console.log(data);
+          // Sensitive: Do not log attendance data in production
+          // console.log('Attendance data:', data); // commented out
 
           // Extract and sort dates
           const dateList = Object.keys(data.attendance).sort();
@@ -46,7 +47,8 @@ export default function PrevAttendance() {
           setStudentNames(Array.from(nameSet).sort());
         }
       } catch (error) {
-        console.error("Fetch students error:", error);
+        // Only log errors, not sensitive data
+        console.error("Fetch attendance error:", error);
       }
     };
 

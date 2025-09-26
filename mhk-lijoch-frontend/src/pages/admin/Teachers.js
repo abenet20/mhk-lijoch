@@ -212,7 +212,7 @@ export default function Teachers() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Back to Dashboard"
+          title="ወደ ዳሽቦርድ ተመለስ"
         >
           &#8592;
         </button>
@@ -230,18 +230,18 @@ export default function Teachers() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Logout"
+          title="ውጣ"
         >
-          Logout
+          ውጣ
         </button>
       </div>
-      <h2>Manage Teachers</h2>
+      <h2>አስተማሪዎችን አስተዳድር</h2>
       <button
         className="btn mb-2"
         style={{ marginBottom: 16 }}
         onClick={() => setShowAdd((v) => !v)}
       >
-        {showAdd ? "Hide Add Teacher" : "Add Teacher"}
+        {showAdd ? "አዲስ አስተማሪ መዝግብን ዝጋ" : "አዲስ አስተማሪ መዝግብ"}
       </button>
       {showAdd && (
         <form
@@ -253,52 +253,52 @@ export default function Teachers() {
           }}
         >
           <label>
-            Name
+            ስም
             <input
               name="name"
-              placeholder="Name"
+              placeholder="ስም"
               value={form.name}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Phone
+            ስልክ
             <input
               name="phone"
-              placeholder="Phone"
+              placeholder="ስልክ"
               value={form.phone}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Grade
+            ደረጃ
             <select
               name="grade"
               value={form.grade}
               onChange={handleChange}
               required
             >
-              <option value="">Select Grade</option>
-              <option value="4-6">age 4 - 6</option>
-              <option value="7-9">age 7 - 9</option>
-              <option value="10-11">age 10 - 11</option>
-              <option value="12-14">age 12 - 14</option>
+              <option value="">ደረጃ ይምረጡ</option>
+              <option value="4-6">እድሜ 4 - 6</option>
+              <option value="7-9">እድሜ 7 - 9</option>
+              <option value="10-11">እድሜ 10 - 11</option>
+              <option value="12-14">እድሜ 12 - 14</option>
             </select>
           </label>
           <label>
-            Address
+            አድራሻ
             <input
               name="address"
-              placeholder="Address"
+              placeholder="አድራሻ"
               value={form.address}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Photo
+            ፎቶ
             <input
               name="photo"
               type="file"
@@ -311,7 +311,7 @@ export default function Teachers() {
             type="submit"
             style={{ alignSelf: "center", width: 140 }}
           >
-            ➕ Add Teacher
+            ➕ መዝግብ
           </button>
         </form>
       )}
@@ -352,7 +352,7 @@ export default function Teachers() {
                   style={{ display: "flex", flexDirection: "column", gap: 10 }}
                 >
                   <label>
-                    Name
+                    ስም
                     <input
                       name="name"
                       type="text"
@@ -364,7 +364,7 @@ export default function Teachers() {
                     />
                   </label>
                   <label>
-                    Phone
+                    ስልክ
                     <input
                       name="phone"
                       type="number"
@@ -376,7 +376,7 @@ export default function Teachers() {
                     />
                   </label>
                   <label>
-                    Grade
+                    ደረጃ
                     <select
                       name="grade"
                       value={editForm.grade}
@@ -385,15 +385,15 @@ export default function Teachers() {
                       }
                       required
                     >
-                      <option value="">Select Grade</option>
-                      <option value="4-6">age 4 - 6</option>
-                      <option value="7-9">age 7 - 9</option>
-                      <option value="10-11">age 10 - 11</option>
-                      <option value="12-14">age 12 - 14</option>
+                      <option value="">ደረጃ ይምረጡ</option>
+                      <option value="4-6">እድሜ 4 - 6</option>
+                      <option value="7-9">እድሜ 7 - 9</option>
+                      <option value="10-11">እድሜ 10 - 11</option>
+                      <option value="12-14">እድሜ 12 - 14</option>
                     </select>
                   </label>
                   <label>
-                    Address
+                    አድራሻ
                     <input
                       name="address"
                       type="text"
@@ -405,7 +405,7 @@ export default function Teachers() {
                     />
                   </label>
                   <label>
-                    Photo
+                    ፎቶ
                     <input
                       name="photo"
                       type="file"
@@ -508,21 +508,21 @@ export default function Teachers() {
                     {t.name}
                   </div>
                   <div style={{ fontSize: 14, color: "#555", marginBottom: 2 }}>
-                    Grade: {t.grade}
+                    ደረጃ፡ {t.grade}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Phone: {t.phone}
+                    ስልክ፡ {t.phone}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Address: {t.address}
+                    አድራሻ፡ {t.address}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Username: {t.username}
+                    የተጠቃሚ ስም፡ {t.username}
                   </div>
                   <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
                     <button
                       className="btn"
-                      title="Edit"
+                      title="አስተካክል"
                       style={{ background: "#f1c40f", color: "#fff" }}
                       onClick={() => edittingForm(t)}
                     >
@@ -530,7 +530,7 @@ export default function Teachers() {
                     </button>
                     <button
                       className="btn"
-                      title="Remove"
+                      title="አስወግድ"
                       style={{ background: "#e74c3c", color: "#fff" }}
                       onClick={() => removeTeacher(t.userId)}
                     >

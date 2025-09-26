@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { Card, Typography, TextField, Button } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Settings() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: localStorage.getItem("name"),
     username: localStorage.getItem("username"),
     oldPassword: "",
     newPassword: "",
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    navigate("/");
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,10 +34,19 @@ export default function Settings() {
     })
       .then((response) => response.json())
       .then((data) => {
+        // console.log(data);
         if (data.success) {
-          alert("Settings saved!");
+          alert(data.message);
+          if (data.message == "settings changed successfully") {
+            handleLogout();
+          }
+        } else if (Array.isArray(data.errors) && data.errors.length > 0) {
+          // Alert the first error message from the errors array
+          alert(data.errors[0].msg);
+        } else if (data.error) {
+          alert(data.error);
         } else {
-          return { success: false, error: data.error };
+          alert("Change failed. Please try again.");
         }
       })
       .catch((error) => {
@@ -62,7 +79,7 @@ export default function Settings() {
           gutterBottom
           style={{ fontWeight: 700 }}
         >
-          Account Settings
+          የመለያ ቅንብሮች
         </Typography>
         <form
           style={{ display: "flex", flexDirection: "column", gap: 20 }}
@@ -73,7 +90,7 @@ export default function Settings() {
         >
           <TextField
             name="name"
-            label="Name"
+            label="ስም"
             variant="outlined"
             value={form.name}
             onChange={handleChange}
@@ -81,7 +98,7 @@ export default function Settings() {
           />
           <TextField
             name="username"
-            label="Username"
+            label="የተጠቃሚ ስም"
             variant="outlined"
             value={form.username}
             onChange={handleChange}
@@ -89,7 +106,7 @@ export default function Settings() {
           />
           <TextField
             name="oldPassword"
-            label="Old Password"
+            label="የድሮ የይለፍ ቃል"
             type="password"
             variant="outlined"
             value={form.oldPassword}
@@ -98,7 +115,7 @@ export default function Settings() {
           />
           <TextField
             name="newPassword"
-            label="New Password"
+            label="አዲስ የይለፍ ቃል"
             type="password"
             variant="outlined"
             value={form.newPassword}
@@ -111,7 +128,7 @@ export default function Settings() {
             color="primary"
             style={{ fontWeight: 600, borderRadius: 8, padding: "10px 0" }}
           >
-            Save
+            አስቀምጥ
           </Button>
         </form>
       </Card>

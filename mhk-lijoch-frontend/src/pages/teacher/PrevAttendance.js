@@ -80,7 +80,7 @@ export default function PrevAttendance() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Back to Dashboard"
+          title="ወደ ዳሽቦርድ ተመለስ"
         >
           &#8592;
         </button>
@@ -94,12 +94,12 @@ export default function PrevAttendance() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Logout"
+          title="ውጣ"
         >
-          Logout
+          ውጣ
         </button>
       </div>
-      <h2>Previous Attendance</h2>
+      <h2>የቀድሞ ቆጣሪ</h2>
       <div
         style={{
           display: "flex",

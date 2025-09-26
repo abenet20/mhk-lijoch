@@ -73,7 +73,7 @@ export default function Login() {
         }}
       >
         <Typography variant="h4" align="center" gutterBottom fontWeight={700}>
-          Login
+          ይግቡ
         </Typography>
         <Box
           component="form"
@@ -82,7 +82,7 @@ export default function Login() {
         >
           <TextField
             name="username"
-            label="Username"
+            label="የተጠቃሚ ስም"
             variant="outlined"
             value={form.username}
             onChange={handleChange}
@@ -91,7 +91,7 @@ export default function Login() {
           />
           <TextField
             name="password"
-            label="Password"
+            label="የይለፍ ቃል"
             type="password"
             variant="outlined"
             value={form.password}
@@ -105,7 +105,7 @@ export default function Login() {
             size="large"
             sx={{ fontWeight: 600, borderRadius: 2, py: 1 }}
           >
-            Login
+            ይግቡ
           </Button>
         </Box>
       </Card>

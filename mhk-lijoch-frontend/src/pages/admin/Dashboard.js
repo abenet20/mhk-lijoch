@@ -35,6 +35,7 @@ ChartJS.register(
 export default function Dashboard() {
   const [general, setGeneral] = useState(null);
   const [classesData, setClassesData] = useState(null);
+  const [genderStatistics, setGenderStatistics] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -63,8 +64,9 @@ export default function Dashboard() {
         if (response.ok && data.success) {
           setClassesData(data.classesData);
           setGeneral(data.general);
+          setGenderStatistics(data.genderStatistics);
           // Sensitive: Do not log dashboard data in production
-          // console.log('Dashboard data:', data); // commented out
+          // console.log("Dashboard data:", data); // commented out
         }
       } catch (error) {
         // Only log errors, not sensitive data
@@ -82,6 +84,20 @@ export default function Dashboard() {
           {
             label: "Students by Class",
             data: Object.values(classesData),
+            backgroundColor: "#1976d2",
+          },
+        ],
+      }
+    : null;
+
+  // Prepare chart data for gender
+  const genderBarData = genderStatistics
+    ? {
+        labels: Object.keys(genderStatistics),
+        datasets: [
+          {
+            label: "Students gender",
+            data: Object.values(genderStatistics),
             backgroundColor: "#1976d2",
           },
         ],
@@ -108,6 +124,26 @@ export default function Dashboard() {
       }
     : null;
 
+  const genderPieData = genderStatistics
+    ? {
+        labels: Object.keys(genderStatistics),
+        datasets: [
+          {
+            label: "Students gender",
+            data: Object.values(genderStatistics),
+            backgroundColor: [
+              "#1976d2",
+              "#388e3c",
+              "#fbc02d",
+              "#d32f2f",
+              "#7b1fa2",
+              "#0288d1",
+            ],
+          },
+        ],
+      }
+    : null;
+
   return (
     <div className={styles.dashboardContainer}>
       <aside className={styles.sidebar}>
@@ -119,47 +155,47 @@ export default function Dashboard() {
             marginBottom: 24,
           }}
         >
-          <h2 style={{ margin: 0 }}>Admin Panel</h2>
+          <h2 style={{ margin: 0 }}>አድሚን ፓነል</h2>
         </div>
         <List>
           <ListItem button component={Link} to="/admin/students">
-            <ListItemText primary="Manage Students" />
+            <ListItemText primary="ተማሪዎችን አስተዳድር" />
           </ListItem>
           <ListItem button component={Link} to="/admin/teachers">
-            <ListItemText primary="Manage Teachers" />
+            <ListItemText primary="አስተዳድር አስተማሪዎች" />
           </ListItem>
           <ListItem button component={Link} to="/settings">
-            <ListItemText primary="Account Settings" />
+            <ListItemText primary="መለያ ቅንብሮች" />
           </ListItem>
           <ListItem button onClick={handleLogout}>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="ውጣ" />
           </ListItem>
         </List>
       </aside>
       <main className={styles.mainContent}>
         <Typography variant="h4" gutterBottom>
-          Dashboard
+          ዳሽቦርድ
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Welcome, {localStorage.getItem("name")}
+          እንኳን ደህና መጡ፣ {localStorage.getItem("name")}
         </Typography>
         <div className={styles.cards}>
           {general && (
             <>
               <div className={styles.card}>
-                <div>Total Students</div>
+                <div>ጠቅላላ ተማሪዎች</div>
                 <div style={{ fontSize: "2rem", fontWeight: "bold" }}>
                   {general.totalStudents}
                 </div>
               </div>
               <div className={styles.card}>
-                <div>Total Teachers</div>
+                <div>ጠቅላላ አስተማሪዎች</div>
                 <div style={{ fontSize: "2rem", fontWeight: "bold" }}>
                   {general.totalTeachers}
                 </div>
               </div>
               <div className={styles.card}>
-                <div>Today's Attendance</div>
+                <div>የዛሬ መገኘት</div>
                 <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
                   {general.todayTotalAttendance}
                 </div>
@@ -173,7 +209,7 @@ export default function Dashboard() {
         <div className={styles.charts}>
           {barData && (
             <div className={styles.chartContainer}>
-              <Typography variant="h6">Students by Class (Bar)</Typography>
+              <Typography variant="h6">ተማሪዎች በክፍል(ባር ገበታ)</Typography>
               <Bar
                 data={barData}
                 options={{
@@ -183,10 +219,28 @@ export default function Dashboard() {
               />
             </div>
           )}
+          {genderBarData && (
+            <div className={styles.chartContainer}>
+              <Typography variant="h6">የተማሪዎች ጾታ(ባር ገበታ)</Typography>
+              <Bar
+                data={genderBarData}
+                options={{
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                }}
+              />
+            </div>
+          )}
           {pieData && (
             <div className={styles.chartContainer}>
-              <Typography variant="h6">Students by Class (Pie)</Typography>
+              <Typography variant="h6">ተማሪዎች በክፍል(ፓይ ገበታ)</Typography>
               <Pie data={pieData} options={{ responsive: true }} />
+            </div>
+          )}
+          {genderPieData && (
+            <div className={styles.chartContainer}>
+              <Typography variant="h6">የተማሪዎች ጾታ(ፓይ ገበታ)</Typography>
+              <Pie data={genderPieData} options={{ responsive: true }} />
             </div>
           )}
         </div>

@@ -104,7 +104,7 @@ export default function Attendance() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Back to Dashboard"
+          title="ወደ ዳሽቦርድ ተመለስ"
         >
           &#8592;
         </button>
@@ -118,13 +118,14 @@ export default function Attendance() {
             cursor: "pointer",
             marginBottom: 16,
           }}
-          title="Logout"
+          title="ውጣ"
         >
-          Logout
+          ውጣ
         </button>
       </div>
       <h2>
-        ዕድሜያቸዉ ከ{className} የሆኑ ልጆች ክፍል በ መምህር {localStorage.getItem("name")}
+        የክፍል ተማሪዎች እና ቆጣሪ ቅጽ ለ {className} ክፍል በመምህሩ{" "}
+        {localStorage.getItem("name")}
       </h2>
       {error && <div style={{ color: "red", marginTop: 10 }}>{error}</div>}
       {success && (
@@ -272,19 +273,19 @@ export default function Attendance() {
       </div>
       <div style={{ textAlign: "center", margin: "2rem 0" }}>
         <button className="btn" onClick={() => saveAttendance()}>
-          Save Attendance
+          ቆጣሪ አስቀምጥ
         </button>
       </div>
       <div className="card mt-2">
-        <h3>Current Attendance State</h3>
+        <h3>የአሁኑ ቆጣሪ ሁኔታ</h3>
         {attendance.length === 0 ? (
-          <div style={{ color: "#888" }}>No attendance marked yet.</div>
+          <div style={{ color: "#888" }}>አሁን ቆጣሪ የተሰጠ የለም።</div>
         ) : (
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Status</th>
+                <th>ስም</th>
+                <th>ሁኔታ</th>
               </tr>
             </thead>
             <tbody>
@@ -297,7 +298,7 @@ export default function Attendance() {
                       fontWeight: 600,
                     }}
                   >
-                    {a.status === "present" ? "✔️ Present" : "❌ Absent"}
+                    {a.status === "present" ? "✔️ አለ" : "❌ የለም"}
                   </td>
                 </tr>
               ))}

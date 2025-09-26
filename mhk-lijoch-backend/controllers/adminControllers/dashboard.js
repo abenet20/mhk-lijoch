@@ -15,17 +15,26 @@ exports.adminDashboard = [
       const ethDate = `${year}-${month}-${day}`; //ethiopian date format
 
       const [results] = await database.query(`
-  SELECT 
-    (SELECT COUNT(*) FROM students WHERE is_deleted = 0) AS totalStudents,
-    (SELECT COUNT(*) FROM teachers WHERE is_deleted = 0) AS totalTeachers,
-    (SELECT COUNT(*) FROM attendance WHERE date = ${ethDate} AND status = 'present' AND is_deleted = 0) AS todayTotalAttendance
-`);
+      SELECT 
+        (SELECT COUNT(*) FROM students WHERE is_deleted = 0) AS totalStudents,
+        (SELECT COUNT(*) FROM students WHERE gender = "Male" AND is_deleted = 0) AS maleStudents,
+        (SELECT COUNT(*) FROM students WHERE gender = "Female" AND is_deleted = 0) AS femaleStudents,
+        (SELECT COUNT(*) FROM teachers WHERE is_deleted = 0) AS totalTeachers
+        `);
 
-      //to calculate attendance oercentage
+      const [result] = await database.query(
+        `
+         SELECT COUNT(*) AS todayTotalAttendance FROM attendance WHERE date = ? AND status = 'present' AND is_deleted = 0 
+         `,
+        [ethDate]
+      );
+
+      //to calculate attendance percentage
       const todayAttendance =
         results[0].totalStudents > 0
-          ? (results[0].todayTotalAttendance / results[0].totalStudents) * 100
+          ? (result[0].todayTotalAttendance / results[0].totalStudents) * 100
           : 0;
+      results[0].todayTotalAttendance = result[0].todayTotalAttendance;
       results[0].todayAttendanceByPercent = todayAttendance;
 
       //to append grades data

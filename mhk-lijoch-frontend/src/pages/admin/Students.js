@@ -222,17 +222,17 @@ export default function Students() {
           cursor: "pointer",
           marginBottom: 16,
         }}
-        title="Back to Dashboard"
+        title="ወደ ዳሽቦርድ ተመለስ"
       >
         &#8592;
       </button>
-      <h2>Manage Students</h2>
+      <h2>ተማሪዎችን አስተዳድር</h2>
       <button
         className="btn mb-2"
         style={{ marginBottom: 16 }}
         onClick={() => setShowAdd((v) => !v)}
       >
-        {showAdd ? "Hide Add Student" : "Add Student"}
+        {showAdd ? "አዲስ ተማሪ መዝግብን ዝጋ" : "አዲስ ተማሪ መዝግብ"}
       </button>
       {showAdd && (
         <form
@@ -244,71 +244,71 @@ export default function Students() {
           }}
         >
           <label>
-            Name
+            ስም
             <input
               name="name"
-              placeholder="Name"
+              placeholder="ስም"
               value={form.name}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Parent Name
+            የወላጅ ስም
             <input
               name="parentName"
-              placeholder="Parent Name"
+              placeholder="የወላጅ ስም"
               value={form.parentName}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Parent Phone
+            የወላጅ ስልክ
             <input
               name="parentPhone"
-              placeholder="Parent Phone"
+              placeholder="የወላጅ ስልክ"
               value={form.parentPhone}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Address
+            አድራሻ
             <input
               name="address"
-              placeholder="Address"
+              placeholder="አድራሻ"
               value={form.address}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Age
+            እድሜ
             <input
               name="age"
               type="number"
-              placeholder="Age"
+              placeholder="እድሜ"
               value={form.age}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Gender
+            ጾታ
             <select
               name="gender"
               value={form.gender}
               onChange={handleChange}
               required
             >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="">ጾታ ይምረጡ</option>
+              <option value="Male">ወንድ</option>
+              <option value="Female">ሴት</option>
             </select>
           </label>
           <label>
-            Photo
+            ፎቶ
             <input
               name="photo"
               type="file"
@@ -321,7 +321,7 @@ export default function Students() {
             type="submit"
             style={{ alignSelf: "center", width: 120 }}
           >
-            ➕ Add
+            ➕ መዝግብ
           </button>
         </form>
       )}
@@ -362,7 +362,7 @@ export default function Students() {
                   style={{ display: "flex", flexDirection: "column", gap: 10 }}
                 >
                   <label>
-                    Name
+                    ስም
                     <input
                       name="name"
                       type="text"
@@ -374,7 +374,7 @@ export default function Students() {
                     />
                   </label>
                   <label>
-                    Age
+                    እድሜ
                     <input
                       name="age"
                       type="number"
@@ -386,7 +386,7 @@ export default function Students() {
                     />
                   </label>
                   <label>
-                    Parent Name
+                    የወላጅ ስም
                     <input
                       name="parentName"
                       type="text"
@@ -398,7 +398,7 @@ export default function Students() {
                     />
                   </label>
                   <label>
-                    Parent Phone
+                    የወላጅ ስልክ
                     <input
                       name="parentPhone"
                       type="text"
@@ -413,7 +413,7 @@ export default function Students() {
                     />
                   </label>
                   <label>
-                    Address
+                    አድራሻ
                     <input
                       name="address"
                       type="text"
@@ -425,7 +425,7 @@ export default function Students() {
                     />
                   </label>
                   <label>
-                    Gender
+                    ጾታ
                     <select
                       name="gender"
                       value={editForm.gender}
@@ -434,13 +434,13 @@ export default function Students() {
                       }
                       required
                     >
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
+                      <option value="">ጾታ ይምረጡ</option>
+                      <option value="Male">ወንድ</option>
+                      <option value="Female">ሴት</option>
                     </select>
                   </label>
                   <label>
-                    Photo
+                    ፎቶ
                     <input
                       name="photo"
                       type="file"
@@ -536,24 +536,24 @@ export default function Students() {
                     {s.name}
                   </div>
                   <div style={{ fontSize: 14, color: "#555", marginBottom: 2 }}>
-                    Age: {s.age}
+                    እድሜ፡ {s.age}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Parent: {s.parentName}
+                    የወላጅ፡ {s.parentName}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Phone: {s.parentPhone}
+                    ስልክ፡ {s.parentPhone}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>
-                    Address: {s.address}
+                    አድራሻ፡ {s.address}
                   </div>
                   <div style={{ fontSize: 13, color: "#888", marginBottom: 8 }}>
-                    Gender: {s.gender}
+                    ጾታ፡ {s.gender}
                   </div>
                   <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
                     <button
                       className="btn"
-                      title="Edit"
+                      title="አስተካክል"
                       style={{ background: "#f1c40f", color: "#fff" }}
                       onClick={() => edittingForm(s)}
                     >
@@ -561,7 +561,7 @@ export default function Students() {
                     </button>
                     <button
                       className="btn"
-                      title="Remove"
+                      title="አስወግድ"
                       style={{ background: "#e74c3c", color: "#fff" }}
                       onClick={() => removeStudent(s.id)}
                     >

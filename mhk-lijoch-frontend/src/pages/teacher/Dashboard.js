@@ -7,6 +7,7 @@ import { Bar } from "react-chartjs-2";
 export default function TeacherDashboard() {
   const [studentsCount, setStudentsCount] = useState(null);
   const [error, setError] = useState(null);
+  const [genderStatistics, setGenderStatistics] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -34,6 +35,8 @@ export default function TeacherDashboard() {
         const data = await response.json();
         if (response.ok && data.success) {
           setStudentsCount(data.studentsCount);
+          setGenderStatistics(data.genderStatistics);
+          // console.log(data);
           setError(null);
         } else {
           setError(data.message || "Failed to fetch dashboard data.");
@@ -47,11 +50,25 @@ export default function TeacherDashboard() {
 
   // Chart data for students count
   const barData = {
-    labels: ["My Class"],
+    labels: ["የክፍል ተማሪዎች"],
     datasets: [
       {
-        label: "Number of Students",
+        label: "ተማሪዎች ብዛት",
         data: [studentsCount || 0],
+        backgroundColor: "#388e3c",
+      },
+    ],
+  };
+
+  // Chart data for students gender statistics
+  const genderBarData = {
+    labels: Object.keys(genderStatistics || {}).map((key) =>
+      key === "males" ? "ወንዶች" : key === "females" ? "ሴቶች" : key
+    ),
+    datasets: [
+      {
+        label: "የተማሪዎች ጾታ",
+        data: Object.values(genderStatistics || {}),
         backgroundColor: "#388e3c",
       },
     ],
@@ -68,7 +85,7 @@ export default function TeacherDashboard() {
             marginBottom: 24,
           }}
         >
-          <h2 style={{ margin: 0 }}>Teacher Panel</h2>
+          <h2 style={{ margin: 0 }}>የአስተማሪ ፓነል</h2>
         </div>
         <List>
           <ListItem button component={Link} to="/teacher/attendance">
@@ -78,21 +95,21 @@ export default function TeacherDashboard() {
             <ListItemText primary="የተጠሩ ስሞች" />
           </ListItem>
           <ListItem button component={Link} to="/settings">
-            <ListItemText primary="Account Settings" />
+            <ListItemText primary="መለያ ቅንብሮች" />
           </ListItem>
           <ListItem button onClick={handleLogout}>
-            <ListItemText primary="Logout" />
+            <ListItemText primary="ውጣ" />
           </ListItem>
         </List>
       </aside>
       <main className={styles.mainContent}>
         <Typography variant="h4" gutterBottom>
-          Dashboard
+          ዳሽቦርድ
         </Typography>
         {error && <Typography color="error">{error}</Typography>}
         <div className={styles.cards}>
           <div className={styles.card}>
-            <div>Number of Students</div>
+            <div>የተማሪዎች ብዛት</div>
             <div style={{ fontSize: "2rem", fontWeight: "bold" }}>
               {studentsCount !== null ? studentsCount : "-"}
             </div>
@@ -100,7 +117,7 @@ export default function TeacherDashboard() {
         </div>
         <div className={styles.charts}>
           <div className={styles.chartContainer}>
-            <Typography variant="h6">Class Size</Typography>
+            <Typography variant="h6">የክፍል ተማሪዎች(ባር ገበታ)</Typography>
             <Bar
               data={barData}
               options={{
@@ -109,6 +126,18 @@ export default function TeacherDashboard() {
               }}
             />
           </div>
+          {genderStatistics && (
+            <div className={styles.chartContainer}>
+              <Typography variant="h6">የተማሪዎች ጾታ(ባር ገበታ)</Typography>
+              <Bar
+                data={genderBarData}
+                options={{
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                }}
+              />
+            </div>
+          )}
         </div>
       </main>
     </div>
